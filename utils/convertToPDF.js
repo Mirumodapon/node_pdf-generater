@@ -1,9 +1,6 @@
 const { generatePdf } = require('html-pdf-node');
-const { readFileSync } = require('fs');
 
-function templateRender(_template, data) {
-  let template = readFileSync(_template, 'utf-8');
-
+function templateRender(template, data) {
   for (let key in data)
     template = template.replace(new RegExp(`{{\ ?${key}\ ?}}`, 'gi'), data[key]);
 
