@@ -1,14 +1,14 @@
 const { readFileSync, readdirSync } = require('fs');
 const convertToPDF = require('../utils/convertToPDF');
 
-function generatePdfController(req, res) {
+async function generatePdfController(req, res) {
   try {
     const path = req.params.template;
 
     if (!path) throw { code: '400' };
     if (!readdirSync('./template').includes(path)) throw { code: '400' };
 
-    const result = convertToPDF(
+    const result = await convertToPDF(
       readFileSync(`./template/${path}`, { encoding: 'utf-8' }),
       req.body
     );
