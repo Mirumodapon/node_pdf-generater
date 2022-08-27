@@ -1,6 +1,7 @@
-const Router = require('express').Router();
+const express = require('express');
+const Router = express.Router();
 
-Router.get('/', (_, res) => res.status(204).send('No Content.'));
+Router.use('/', express.static('./client', { extensions: ['html'] }));
 
 Router.post('/generate/pdf/:template', [], require('./generatePDF.controller'));
 
