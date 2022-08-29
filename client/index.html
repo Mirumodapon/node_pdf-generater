@@ -3,6 +3,23 @@
   <head>
     <link rel="stylesheet" href="/boostrap/5.2.0.min.css" />
     <link rel="stylesheet" href="http://localhost:5000/boostrap/icons-1.9.1.css" />
+    <script defer>
+      const row = ({ teacher, id, name }) =>
+        `<tr>
+          <td>${id.slice(0, 3)}</td>
+          <td>${name}</td>
+          <td>${teacher}</td>
+          <td>
+            <i class="bi bi-pencil-square"></i>
+            <i class="bi bi-trash"></i>
+            </td>
+          </tr>`;
+
+      fetch('/data')
+        .then((x) => x.json())
+        .then((x) => x.map((i) => row(i)))
+        .then((x) => (document.querySelector('tbody').innerHTML = x.join('')));
+    </script>
   </head>
   <body>
     <main class="container">
