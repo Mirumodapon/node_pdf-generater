@@ -13,10 +13,10 @@ module.exports = async function (data) {
         namedPlaceholders: true,
         sql: `INSERT INTO data (
           id, acad, teacher, grade, credit, math, theory, implement, general,
-          time, A, B, BO, avg, rate
+          time, A, B, BO, avg, rate, name
         ) VALUES (
           :id, :acad, :teacher, :grade, :credit, :math, :theory, :implement, :general,
-          :time, :A, :B, :BO, :avg, :rate
+          :time, :A, :B, :BO, :avg, :rate, :name
         );`
       },
       data
