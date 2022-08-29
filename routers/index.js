@@ -5,6 +5,7 @@ Router.use('/', express.static('./client', { extensions: ['html'] }));
 
 Router.get('/data', [], require('./dataList.controller'));
 Router.post('/data', [], require('./dataSubmit.controller'));
+Router.delete('/data/:id', [], require('./dataDelete.controller'));
 
 Router.post('/generate/pdf/:template', [], require('./generatePDF.controller'));
 
