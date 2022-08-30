@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="http://localhost:5000/boostrap/icons-1.9.1.css" />
     <script defer>
       const deleteData = (id) =>
+        !confirm('確定刪除嗎？') ||
         fetch(`/data/${id}`, { method: 'DELETE' }).then((x) => window.location.reload());
       const row = ({ teacher, id, name, acad }) =>
         `<tr>
@@ -23,6 +24,15 @@
         .then((x) => x.map((i) => row(i)))
         .then((x) => (document.querySelector('tbody').innerHTML = x.join('')));
     </script>
+    <style>
+      a {
+        color: inherit;
+      }
+      i {
+        font-size: 1.4em;
+        margin: 0 5px;
+      }
+    </style>
   </head>
   <body>
     <main class="container">

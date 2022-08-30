@@ -14,7 +14,9 @@ function convertToPDF(template, data) {
 
   function promiseFunc(success, failed) {
     try {
-      generatePdf({ content }, { width: '11.7in', height: '8.27in' }).then((pdf) => success(pdf));
+      generatePdf({ content }, { width: '11.7in', height: '8.27in', margin: { top: '.5in' } }).then(
+        (pdf) => success(pdf)
+      );
     } catch (err) {
       failed(err);
     }
