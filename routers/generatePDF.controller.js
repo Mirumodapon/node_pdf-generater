@@ -6,8 +6,8 @@ async function generatePdfController(req, res) {
   try {
     const [data] = await getDetailData(req.query.id);
 
-    for (let i = 0; i < 5; ++i) data[`A${i}`] = data.A.charAt(i) === '1' ? 'V' : 'X';
-    for (let i = 0; i < 7; ++i) data[`B${i}`] = data.B.charAt(i) === '1' ? 'true' : 'false';
+    for (let i = 0; i < 6; ++i) data[`A${i}`] = data.A.charAt(i) === '1' ? 'V' : 'X';
+    for (let i = 0; i < 8; ++i) data[`B${i}`] = data.B.charAt(i) === '1' ? 'checked' : '';
 
     const result = await convertToPDF(
       readFileSync(`./template/evaluation.html`, { encoding: 'utf-8' }),
