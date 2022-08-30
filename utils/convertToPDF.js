@@ -4,7 +4,7 @@ function templateRender(template, data) {
   for (let key in data)
     template = template.replace(new RegExp(`{{\ ?${key}\ ?}}`, 'gi'), data[key]);
 
-  template = template.replace(/{{\ ?[A-Za-z]+\ ?/, '');
+  template = template.replaceAll(new RegExp(/{{\ ?\w*\ ?}}/, 'g'), '');
 
   return template;
 }

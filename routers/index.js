@@ -7,6 +7,6 @@ Router.get('/data', [], require('./dataList.controller'));
 Router.post('/data', [], require('./dataSubmit.controller'));
 Router.delete('/data/:id', [], require('./dataDelete.controller'));
 
-Router.post('/generate/pdf/:template', [], require('./generatePDF.controller'));
+Router.get('/view', [], require('./generatePDF.controller'));
 
 module.exports = Router;

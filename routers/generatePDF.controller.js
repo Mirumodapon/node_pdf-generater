@@ -1,30 +1,26 @@
 const { readFileSync, readdirSync } = require('fs');
 const convertToPDF = require('../utils/convertToPDF');
+const getDetailData = require('../db/getDetailData');
 
 async function generatePdfController(req, res) {
   try {
-    const path = req.params.template;
+    const [data] = await getDetailData(req.query.id);
 
-    if (!path) throw { code: '400' };
-    if (!readdirSync('./template').includes(path)) throw { code: '400' };
+    for (let i = 0; i < 5; ++i) data[`A${i}`] = data.A.charAt(i) === '1' ? 'V' : 'X';
+    for (let i = 0; i < 7; ++i) data[`B${i}`] = data.B.charAt(i) === '1' ? 'true' : 'false';
 
     const result = await convertToPDF(
-      readFileSync(`./template/${path}`, { encoding: 'utf-8' }),
-      req.body
+      readFileSync(`./template/evaluation.html`, { encoding: 'utf-8' }),
+      data
     );
+
+    // return res.send(data);
 
     res.set('Content-Type', 'application/pdf');
     return res.status(200).send(result);
   } catch (err) {
-    switch (err.code) {
-      case 'ENOENT':
-      case '400':
-        return res.status(400).send('Bad Require.');
-      default:
-        console.error(err.message);
-        console.error(err.code);
-        return res.status(500).send('Internal Server Error.');
-    }
+    console.error(err);
+    return res.status(500).send('Internal Server Error.');
   }
 }
 
